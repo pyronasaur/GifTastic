@@ -1,3 +1,10 @@
 .header{
     min-height: 50px;
 }
+
+.flexio {
+    display: flex; /* or inline-flex */
+    flex-direction: row;
+    justify-content: space-evenly; 
+    flex-wrap: wrap;
+}
