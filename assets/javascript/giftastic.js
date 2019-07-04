@@ -2,7 +2,9 @@ $(document).ready(function(){
     //set base portion of request URL
     var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=BlUwnjsAJO1DKy8IZBvwGroJ6kicFbd9&q=";
 
-    var otherParams = "&limit=25&offset=0&rating=PG&lang=en"
+    var otherParams = "&limit=25&offset=0&rating=G&lang=en"
+
+    var firstButtonAdded = false;
 
     $(document).on("click", ".hero-button", heroClick);
 
@@ -35,7 +37,7 @@ $(document).ready(function(){
         };
 
 
-    function addImages(resultsArray) {
+    function addImages(results) {
         console.log(results);
               //loop results for first five responses
               for (var i = 0; i < results.length; i++) {
@@ -96,12 +98,16 @@ $(document).ready(function(){
         var a = $("<button>");
 
         a.addClass("hero-button btn btn-primary mt-2");
-
+        if(firstButtonAdded) {
+            a.addClass("ml-1");
+        }
         a.text(hero);
 
         $("#buttons").append(a);
 
         $(document).on("click", ".hero-button", heroClick);
+
+        firstButtonAdded = true;
       });
       
 });
