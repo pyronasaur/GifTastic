@@ -29,7 +29,14 @@ $(document).ready(function(){
             .then(function(response) {
             $("#gif-location").empty();
               var results = response.data;
-                console.log(results);
+              addImages(results);
+                
+              })
+        };
+
+
+    function addImages(resultsArray) {
+        console.log(results);
               //loop results for first five responses
               for (var i = 0; i < results.length; i++) {
                 var articleDiv = $("<div>");
@@ -42,19 +49,25 @@ $(document).ready(function(){
                 var p = $("<figcaption>").text("Rating: " + rating);
     
                 var heroImage = $("<img>");
-                heroImage.attr("src", results[i].images.fixed_height.url);
+                heroImage.addClass("gif");
+                heroImage.attr("src", results[i].images.fixed_height_still.url);
+                heroImage.attr("data-animate", results[i].images.fixed_height.url);                
+                heroImage.attr("data-still", results[i].images.fixed_height_still.url);
+                heroImage.attr("data-state", "still");
                 
                 gifDiv.prepend(p);
                 gifDiv.prepend(heroImage);
     
                 $("#gif-location").prepend(gifDiv);
-              }
-        });
-    };
+                    
+        }
+    }
+    $(document).on("click", ".gif", animateGif);
+    
+    function animateGif(){
 
-    $(".gif").on("click", function() {
-
-        var state = $(this).attr("data-state");     
+        var state = $(this).attr("data-state");
+        console.log(state);     
         var animate = $(this).attr("data-animate");
         console.log(animate);
         var still = $(this).attr("data-still");
@@ -71,7 +84,7 @@ $(document).ready(function(){
           $(this).attr("data-state", "still");
         }
 
-    });
+    };
 
 
 
